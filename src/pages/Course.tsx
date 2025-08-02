@@ -1195,7 +1195,7 @@ const Course = () => {
                 <input
                   type="text"
                   placeholder="Escribe tu pregunta..."
-                  className="flex-1 p-2 border rounded-md text-foreground"
+                  className="flex-1 p-2 border rounded-md bg-background text-foreground"
                 />
                 <Button>Enviar</Button>
               </div>
