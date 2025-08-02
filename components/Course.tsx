@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { 
   ArrowLeft, 
   LogOut, 
@@ -20,7 +21,8 @@ import {
   CheckCircle,
   Clock,
   Star,
-  Send
+  Send,
+  ChevronRight
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
@@ -68,11 +70,76 @@ const Course = () => {
   }
 
   const lessons = [
-    { id: 1, title: "Introducción a la IA", duration: "15 min", completed: true },
-    { id: 2, title: "¿Qué es ChatGPT?", duration: "20 min", completed: true },
-    { id: 3, title: "Primeros pasos con ChatGPT", duration: "25 min", completed: false },
-    { id: 4, title: "Prompts efectivos", duration: "30 min", completed: false },
-    { id: 5, title: "Introducción a Midjourney", duration: "18 min", completed: false },
+    { 
+      id: 1, 
+      title: "Introducción a la IA", 
+      duration: "15 min", 
+      completed: true,
+      description: "Conceptos fundamentales de la Inteligencia Artificial",
+      content: [
+        "¿Qué es la Inteligencia Artificial?",
+        "Historia y evolución de la IA",
+        "Aplicaciones actuales en el mundo real",
+        "Tipos de IA: débil vs fuerte",
+        "El futuro de la IA"
+      ]
+    },
+    { 
+      id: 2, 
+      title: "¿Qué es ChatGPT?", 
+      duration: "20 min", 
+      completed: true,
+      description: "Introducción completa al modelo de lenguaje ChatGPT",
+      content: [
+        "Qué es un modelo de lenguaje",
+        "Cómo funciona ChatGPT",
+        "Capacidades y limitaciones",
+        "Diferencias entre versiones",
+        "Casos de uso principales"
+      ]
+    },
+    { 
+      id: 3, 
+      title: "Primeros pasos con ChatGPT", 
+      duration: "25 min", 
+      completed: false,
+      description: "Aprende a usar ChatGPT de manera efectiva",
+      content: [
+        "Creando tu cuenta",
+        "Interfaz y navegación",
+        "Tu primera conversación",
+        "Configuración básica",
+        "Consejos para principiantes"
+      ]
+    },
+    { 
+      id: 4, 
+      title: "Prompts efectivos", 
+      duration: "30 min", 
+      completed: false,
+      description: "Técnicas avanzadas para obtener mejores resultados",
+      content: [
+        "¿Qué es un prompt?",
+        "Estructura de un buen prompt",
+        "Técnicas de prompting",
+        "Ejemplos prácticos",
+        "Errores comunes a evitar"
+      ]
+    },
+    { 
+      id: 5, 
+      title: "Introducción a Midjourney", 
+      duration: "18 min", 
+      completed: false,
+      description: "Generación de imágenes con IA",
+      content: [
+        "¿Qué es Midjourney?",
+        "Configuración inicial",
+        "Comandos básicos",
+        "Parámetros de calidad",
+        "Creando tu primera imagen"
+      ]
+    },
   ];
 
   const completedLessons = lessons.filter(lesson => lesson.completed).length;
@@ -128,47 +195,89 @@ const Course = () => {
               </CardContent>
             </Card>
 
-            {/* Lessons */}
+            {/* Módulo de Lecciones Expandidas */}
             <Card className="glass-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BookOpen className="w-5 h-5" />
-                  Lecciones del Curso
+                  Módulo Completo de IA
                 </CardTitle>
                 <CardDescription>
-                  Aprende paso a paso todo sobre Inteligencia Artificial
+                  Todas las lecciones organizadas en un solo módulo interactivo
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {lessons.map((lesson, index) => (
-                  <div key={lesson.id} className="flex items-center gap-4 p-4 rounded-lg border border-border/50 hover:bg-accent/50 transition-colors">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-semibold text-sm">
-                      {lesson.completed ? (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                      ) : (
-                        index + 1
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-medium">{lesson.title}</h3>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="w-3 h-3" />
-                        {lesson.duration}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {lesson.completed && (
-                        <Badge variant="secondary" className="text-green-600">
-                          Completado
-                        </Badge>
-                      )}
-                      <Button size="sm" variant={lesson.completed ? "outline" : "default"}>
-                        <Play className="w-3 h-3 mr-1" />
-                        {lesson.completed ? "Revisar" : "Empezar"}
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+              <CardContent>
+                <Accordion type="multiple" className="w-full space-y-4">
+                  {lessons.map((lesson, index) => (
+                    <AccordionItem 
+                      key={lesson.id} 
+                      value={`lesson-${lesson.id}`}
+                      className="border border-border/50 rounded-lg px-4 bg-card/50"
+                    >
+                      <AccordionTrigger className="hover:no-underline py-4">
+                        <div className="flex items-center gap-4 w-full">
+                          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-semibold text-sm">
+                            {lesson.completed ? (
+                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            ) : (
+                              index + 1
+                            )}
+                          </div>
+                          <div className="flex-1 text-left">
+                            <h3 className="font-medium text-foreground">{lesson.title}</h3>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                {lesson.duration}
+                              </div>
+                              {lesson.completed && (
+                                <Badge variant="secondary" className="text-green-600 text-xs">
+                                  Completado
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </AccordionTrigger>
+                      
+                      <AccordionContent className="pb-6">
+                        <div className="space-y-4 pt-2">
+                          <p className="text-muted-foreground">{lesson.description}</p>
+                          
+                          <div className="space-y-3">
+                            <h4 className="font-medium text-sm text-foreground">Contenido de la lección:</h4>
+                            <ul className="space-y-2">
+                              {lesson.content.map((item, itemIndex) => (
+                                <li key={itemIndex} className="flex items-start gap-2 text-sm">
+                                  <ChevronRight className="w-3 h-3 mt-0.5 text-primary flex-shrink-0" />
+                                  <span className="text-muted-foreground">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          
+                          <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                            <Button 
+                              size="sm" 
+                              variant={lesson.completed ? "outline" : "default"}
+                              className="flex-1 sm:flex-none"
+                            >
+                              <Play className="w-3 h-3 mr-2" />
+                              {lesson.completed ? "Revisar Lección" : "Empezar Lección"}
+                            </Button>
+                            
+                            {lesson.completed && (
+                              <Button size="sm" variant="ghost" className="text-muted-foreground">
+                                <CheckCircle className="w-3 h-3 mr-2" />
+                                Marcar pendiente
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </CardContent>
             </Card>
           </div>
