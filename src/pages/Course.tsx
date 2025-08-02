@@ -2,16 +2,22 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Brain, 
-  ArrowLeft, 
-  CheckCircle, 
-  PlayCircle, 
-  Target, 
+import {
+  Brain,
+  ArrowLeft,
+  CheckCircle,
+  PlayCircle,
+  Target,
   Lightbulb,
   Wrench,
   FlaskConical,
@@ -24,7 +30,10 @@ import {
   Video,
   Mic,
   FileText,
-  Bot
+  Bot,
+  Globe,
+  Download,
+  Lock,
 } from "lucide-react";
 
 const Course = () => {
@@ -39,33 +48,289 @@ const Course = () => {
   }
 
   const toggleLessonComplete = (lessonId: string) => {
-    setCompletedLessons(prev => 
-      prev.includes(lessonId) 
-        ? prev.filter(id => id !== lessonId)
+    setCompletedLessons((prev) =>
+      prev.includes(lessonId)
+        ? prev.filter((id) => id !== lessonId)
         : [...prev, lessonId]
     );
   };
 
   const progressPercentage = (completedLessons.length / 3) * 100;
 
-  const aiToolsData = [
-    { type: "🧠 Multimodal", description: "Entiende texto + imágenes + voz", examples: "ChatGPT-4o, Gemini, Claude 3" },
-    { type: "✍️ Texto", description: "Escribe, corrige, resume, explica", examples: "Perplexity, ChatGPT, Claude" },
-    { type: "🎨 Imagen", description: "Crea ilustraciones, logos, arte, fotos", examples: "Midjourney, Ideogram, Leonardo AI" },
-    { type: "🎥 Vídeo", description: "Genera vídeos a partir de texto", examples: "RunwayML, Pika, VEO3" },
-    { type: "🔊 Voz / Audio", description: "Convierte texto en voz o música", examples: "ElevenLabs, Suno, PlayHT" },
-    { type: "📄 Documentos", description: "Resume, analiza y responde sobre PDFs", examples: "Humata, AskYourPDF, NotebookLM" },
-    { type: "🤖 Automatización", description: "Conecta apps y ejecuta procesos automáticos", examples: "Make, N8N, Google Opal" }
-  ];
+  const aiToolsByCategory = {
+    Multimodales: [
+      {
+        name: "ChatGPT (OpenAI)",
+        web: "chat.openai.com",
+        mobile: "iOS y Android",
+        offline: "No oficialmente (pero sí con LM Studio y modelos open source)",
+        models: "GPT-3.5 (gratis), GPT-4 (Plus)",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "GPT-3.5, sin acceso a imágenes ni navegación web",
+          },
+          {
+            name: "Plus",
+            price: "20 $/mes",
+            features: "GPT-4o (texto, imagen, voz, archivos, web), acceso rápido",
+          },
+        ],
+      },
+      {
+        name: "Gemini (Google)",
+        web: "gemini.google.com",
+        mobile: "Integrada en Android",
+        offline: "No",
+        models: "Gemini 1.5 (gratis), Gemini Advanced (Pro 1.5)",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "Texto, imágenes, búsqueda web, PDFs",
+          },
+          {
+            name: "Advanced",
+            price: "21,99 €/mes",
+            features: "Modelo más potente, contexto largo, tareas complejas",
+          },
+        ],
+      },
+      {
+        name: "Claude (Anthropic)",
+        web: "claude.ai",
+        mobile: "N/A",
+        offline: "No",
+        models: "Claude 3 Opus (pago), Claude 3 Sonnet (freemium)",
+        plans: [
+          { name: "Gratis", price: "0 €", features: "Claude Sonnet" },
+          {
+            name: "Pro",
+            price: "20 $/mes",
+            features: "Claude Opus, mejor comprensión de contexto",
+          },
+        ],
+      },
+    ],
+    "Texto Puro": [
+      {
+        name: "Perplexity AI",
+        web: "perplexity.ai",
+        mobile: "Sí",
+        offline: "No",
+        models: "Propio, con opción a GPT-4 y Claude 3",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "Respuestas con fuentes, modo Copilot",
+          },
+          {
+            name: "Pro",
+            price: "20 $/mes",
+            features: "GPT-4, Claude 3, historial y archivos PDF",
+          },
+        ],
+      },
+      {
+        name: "Mistral / Open Source",
+        web: "N/A",
+        mobile: "N/A",
+        offline: "Sí, con LM Studio, Oobabooga, Ollama",
+        models: "Mistral, LLaMA, Phi-3",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features:
+              "100% gratis, sin internet. Requiere 16GB RAM y 10-20GB disco.",
+          },
+        ],
+      },
+    ],
+    Imagen: [
+      {
+        name: "Midjourney",
+        web: "Discord",
+        mobile: "Discord",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          {
+            name: "Básico",
+            price: "10 $/mes",
+            features: "3.3 horas de generación/mes",
+          },
+          {
+            name: "Estándar",
+            price: "30 $/mes",
+            features: "Generación más rápida",
+          },
+        ],
+      },
+      {
+        name: "Ideogram AI",
+        web: "ideogram.ai",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          { name: "Gratis", price: "0 €", features: "Uso limitado diario" },
+          { name: "Pro", price: "Próximamente", features: "N/A" },
+        ],
+      },
+      {
+        name: "Leonardo AI",
+        web: "leonardo.ai",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "150 tokens diarios aprox.",
+          },
+          {
+            name: "Pro",
+            price: "Desde 10 $",
+            features: "Más tokens, calidad, prioridad",
+          },
+        ],
+      },
+    ],
+    Vídeo: [
+      {
+        name: "RunwayML",
+        web: "runwayml.com",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "Exportaciones limitadas a baja resolución",
+          },
+          {
+            name: "Estándar",
+            price: "Desde 15 $",
+            features: "Exportación HD, más tiempo y calidad",
+          },
+        ],
+      },
+      {
+        name: "Pika.art",
+        web: "pika.art",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          { name: "Gratis", price: "0 €", features: "Beta con acceso limitado" },
+        ],
+      },
+    ],
+    "Voz y Audio": [
+      {
+        name: "ElevenLabs",
+        web: "elevenlabs.io",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "10,000 caracteres/mes",
+          },
+          {
+            name: "Starter",
+            price: "5 $",
+            features: "30 mins de audio HD + clon de voz",
+          },
+        ],
+      },
+      {
+        name: "Suno AI",
+        web: "suno.ai",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          { name: "Gratis", price: "0 €", features: "Uso personal" },
+        ],
+      },
+    ],
+    Automatización: [
+      {
+        name: "Make",
+        web: "make.com",
+        mobile: "N/A",
+        offline: "No",
+        models: "N/A",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "Hasta 1,000 operaciones/mes",
+          },
+          {
+            name: "Core",
+            price: "9 $",
+            features: "Más velocidad y operaciones",
+          },
+        ],
+      },
+      {
+        name: "N8N",
+        web: "n8n.io",
+        mobile: "N/A",
+        offline: "Sí, con Docker",
+        models: "N/A",
+        plans: [
+          {
+            name: "Gratis local",
+            price: "0 €",
+            features: "Uso completo sin restricciones",
+          },
+          { name: "Cloud", price: "Desde 20 $", features: "Instancia alojada" },
+        ],
+      },
+      {
+        name: "Google Opal",
+        web: "Próximamente",
+        mobile: "N/A",
+        offline: "No",
+        models: "N/A",
+        plans: [
+          {
+            name: "Beta privada",
+            price: "N/A",
+            features: "Integrado con Google One AI Premium",
+          },
+        ],
+      },
+    ],
+  };
 
   const toolSelectorData = [
     { need: "Escribir textos creativos", tool: "ChatGPT, Gemini" },
     { need: "Hacer un resumen de un PDF", tool: "AskYourPDF, Humata" },
-    { need: "Diseñar un logo o imagen artística", tool: "Midjourney, Ideogram" },
+    {
+      need: "Diseñar un logo o imagen artística",
+      tool: "Midjourney, Ideogram",
+    },
     { need: "Crear una voz para un personaje", tool: "ElevenLabs, PlayHT" },
     { need: "Generar un vídeo corto automático", tool: "Runway, Pika" },
-    { need: "Automatizar envíos, formularios, emails", tool: "Make, N8N" },
-    { need: "Hacer todo en uno desde un solo sitio", tool: "ChatGPT-4o, Gemini Advanced" }
+    {
+      need: "Automatizar envíos, formularios, emails",
+      tool: "Make, N8N",
+    },
+    {
+      need: "Hacer todo en uno desde un solo sitio",
+      tool: "ChatGPT-4o, Gemini Advanced",
+    },
   ];
 
   return (
@@ -89,13 +354,17 @@ const Course = () => {
                 </div>
                 <div>
                   <h1 className="font-bold text-xl">MÓDULO 1</h1>
-                  <p className="text-sm text-muted-foreground">Bienvenido al Universo IA</p>
+                  <p className="text-sm text-muted-foreground">
+                    Bienvenido al Universo IA
+                  </p>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <div className="text-sm font-medium">{Math.round(progressPercentage)}% completado</div>
+                <div className="text-sm font-medium">
+                  {Math.round(progressPercentage)}% completado
+                </div>
                 <Progress value={progressPercentage} className="w-32" />
               </div>
               <Trophy className="h-6 w-6 text-accent" />
@@ -118,18 +387,28 @@ const Course = () => {
               <CardContent className="space-y-2">
                 {[
                   { id: "1.1", title: "¿Qué es la IA?", icon: Target },
-                  { id: "1.2", title: "Clasificación de herramientas", icon: Wrench },
-                  { id: "1.3", title: "¿Qué herramienta usar?", icon: Lightbulb }
+                  {
+                    id: "1.2",
+                    title: "Clasificación de herramientas",
+                    icon: Wrench,
+                  },
+                  {
+                    id: "1.3",
+                    title: "¿Qué herramienta usar?",
+                    icon: Lightbulb,
+                  },
                 ].map((lesson) => {
                   const Icon = lesson.icon;
                   const isCompleted = completedLessons.includes(lesson.id);
                   const isActive = activeLesson === lesson.id;
-                  
+
                   return (
                     <Button
                       key={lesson.id}
                       variant={isActive ? "default" : "ghost"}
-                      className={`w-full justify-start gap-3 ${isCompleted ? "bg-primary/10" : ""}`}
+                      className={`w-full justify-start gap-3 ${
+                        isCompleted ? "bg-primary/10" : ""
+                      }`}
                       onClick={() => setActiveLesson(lesson.id)}
                     >
                       {isCompleted ? (
@@ -156,14 +435,20 @@ const Course = () => {
                       <div>
                         <CardTitle className="text-2xl flex items-center gap-3">
                           <Target className="h-6 w-6 text-primary" />
-                          Lección 1.1 - ¿Qué es la IA (y por qué debería importarte)?
+                          Lección 1.1 - ¿Qué es la IA (y por qué debería
+                          importarte)?
                         </CardTitle>
                         <CardDescription className="mt-2">
-                          Que entiendas para qué sirve la IA hoy mismo, sin tecnicismos, sin historia, sin ciencia ficción.
+                          Que entiendas para qué sirve la IA hoy mismo, sin
+                          tecnicismos, sin historia, sin ciencia ficción.
                         </CardDescription>
                       </div>
                       <Button
-                        variant={completedLessons.includes("1.1") ? "default" : "outline"}
+                        variant={
+                          completedLessons.includes("1.1")
+                            ? "default"
+                            : "outline"
+                        }
                         onClick={() => toggleLessonComplete("1.1")}
                       >
                         {completedLessons.includes("1.1") ? (
@@ -181,7 +466,8 @@ const Course = () => {
                     {/* Contenido didáctico */}
                     <div className="prose prose-sm max-w-none">
                       <p className="text-lg">
-                        La Inteligencia Artificial generativa es como un <strong>ayudante invisible</strong> que puede:
+                        La Inteligencia Artificial generativa es como un{" "}
+                        <strong>ayudante invisible</strong> que puede:
                       </p>
                       <ul className="space-y-2 mt-4">
                         <li className="flex items-center gap-3">
@@ -198,14 +484,18 @@ const Course = () => {
                         </li>
                         <li className="flex items-center gap-3">
                           <Video className="h-5 w-5 text-primary flex-shrink-0" />
-                          Crear música, vídeos y hasta automatizar tareas de tu día a día
+                          Crear música, vídeos y hasta automatizar tareas de tu
+                          día a día
                         </li>
                       </ul>
                       <div className="bg-accent/10 p-4 rounded-lg mt-6">
                         <p className="flex items-start gap-3">
                           <Lightbulb className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                           <span>
-                            <strong>Piénsalo así:</strong> la IA generativa es como tener una <strong>miniempresa a tu disposición</strong> que trabaja gratis 24/7.
+                            <strong>Piénsalo así:</strong> la IA generativa es
+                            como tener una{" "}
+                            <strong>miniempresa a tu disposición</strong> que
+                            trabaja gratis 24/7.
                           </span>
                         </p>
                       </div>
@@ -218,8 +508,17 @@ const Course = () => {
                         Herramientas mencionadas
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {["ChatGPT", "Gemini", "Claude", "Midjourney", "ElevenLabs", "Make"].map((tool) => (
-                          <Badge key={tool} variant="secondary">{tool}</Badge>
+                        {[
+                          "ChatGPT",
+                          "Gemini",
+                          "Claude",
+                          "Midjourney",
+                          "ElevenLabs",
+                          "Make",
+                        ].map((tool) => (
+                          <Badge key={tool} variant="secondary">
+                            {tool}
+                          </Badge>
                         ))}
                       </div>
                     </div>
@@ -233,13 +532,21 @@ const Course = () => {
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="mb-4">Abre ChatGPT o Gemini y prueba este prompt:</p>
+                        <p className="mb-4">
+                          Abre ChatGPT o Gemini y prueba este prompt:
+                        </p>
                         <div className="bg-card p-4 rounded-lg border font-mono text-sm">
-                          Quiero organizar un fin de semana con amigos. Somos 4, tenemos coche, poco presupuesto y nos gustan las actividades al aire libre. ¿Qué plan podrías organizarme con lugares, horarios y presupuesto aproximado?
+                          Quiero organizar un fin de semana con amigos. Somos 4,
+                          tenemos coche, poco presupuesto y nos gustan las
+                          actividades al aire libre. ¿Qué plan podrías
+                          organizarme con lugares, horarios y presupuesto
+                          aproximado?
                         </div>
                         <div className="mt-4 p-3 bg-primary/10 rounded-lg">
                           <p className="text-sm">
-                            <strong>Resultado esperado:</strong> Una propuesta real de viaje con opciones de rutas, alojamiento barato y actividades, todo generado por IA.
+                            <strong>Resultado esperado:</strong> Una propuesta
+                            real de viaje con opciones de rutas, alojamiento
+                            barato y actividades, todo generado por IA.
                           </p>
                         </div>
                       </CardContent>
@@ -256,14 +563,20 @@ const Course = () => {
                       <div>
                         <CardTitle className="text-2xl flex items-center gap-3">
                           <Wrench className="h-6 w-6 text-primary" />
-                          Lección 1.2 - Clasificación práctica de herramientas de IA
+                          Lección 1.2 - Clasificación práctica de
+                          herramientas de IA
                         </CardTitle>
                         <CardDescription className="mt-2">
-                          Conocer qué tipos de IA existen según lo que puedes hacer con ellas.
+                          Conocer qué tipos de IA existen según lo que puedes
+                          hacer con ellas.
                         </CardDescription>
                       </div>
                       <Button
-                        variant={completedLessons.includes("1.2") ? "default" : "outline"}
+                        variant={
+                          completedLessons.includes("1.2")
+                            ? "default"
+                            : "outline"
+                        }
                         onClick={() => toggleLessonComplete("1.2")}
                       >
                         {completedLessons.includes("1.2") ? (
@@ -280,27 +593,64 @@ const Course = () => {
                   <CardContent className="space-y-6">
                     <div className="prose prose-sm max-w-none">
                       <p className="text-lg">
-                        Piensa en la IA como una <strong>caja de herramientas</strong>. No todas hacen lo mismo, pero todas te ayudan a crear algo. Aquí tienes una clasificación práctica y visual:
+                        Piensa en la IA como una{" "}
+                        <strong>caja de herramientas</strong>. No todas hacen
+                        lo mismo, pero todas te ayudan a crear algo. Aquí
+                        tienes una clasificación práctica y visual:
                       </p>
                     </div>
 
-                    {/* Tabla de herramientas */}
-                    <div className="grid gap-4">
-                      {aiToolsData.map((tool, index) => (
-                        <Card key={index} className="hover:shadow-md transition-shadow">
-                          <CardContent className="p-4">
-                            <div className="flex items-start gap-4">
-                              <div className="text-2xl">{tool.type.split(" ")[0]}</div>
-                              <div className="flex-1">
-                                <div className="font-semibold text-lg">{tool.type.substring(2)}</div>
-                                <div className="text-muted-foreground text-sm mb-2">{tool.description}</div>
-                                <div className="text-xs text-primary font-medium">{tool.examples}</div>
-                              </div>
+                    {/* START: Updated Content for Lesson 1.2 */}
+                    <Tabs defaultValue="Multimodales" className="w-full">
+                      <TabsList className="grid w-full grid-cols-3 md:grid-cols-6">
+                        {Object.keys(aiToolsByCategory).map((category) => (
+                          <TabsTrigger key={category} value={category}>
+                            {category}
+                          </TabsTrigger>
+                        ))}
+                      </TabsList>
+                      {Object.entries(aiToolsByCategory).map(
+                        ([category, tools]) => (
+                          <TabsContent
+                            key={category}
+                            value={category}
+                            className="mt-4"
+                          >
+                            <div className="grid gap-4 md:grid-cols-2">
+                              {tools.map((tool, index) => (
+                                <Card key={index} className="p-4">
+                                  <CardTitle className="text-lg mb-2">
+                                    {tool.name}
+                                  </CardTitle>
+                                  <div className="text-sm space-y-2 text-muted-foreground">
+                                    <p>
+                                      <Globe className="inline h-4 w-4 mr-2" />
+                                      {tool.web}
+                                    </p>
+                                    <p>
+                                      <Download className="inline h-4 w-4 mr-2" />
+                                      Instalable: {tool.offline}
+                                    </p>
+                                    <div>
+                                      <strong>Planes:</strong>
+                                      <ul className="list-disc pl-5 mt-1">
+                                        {tool.plans.map((plan, pIndex) => (
+                                          <li key={pIndex}>
+                                            <strong>{plan.name}</strong> (
+                                            {plan.price}): {plan.features}
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </Card>
+                              ))}
                             </div>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
+                          </TabsContent>
+                        )
+                      )}
+                    </Tabs>
+                    {/* END: Updated Content for Lesson 1.2 */}
 
                     {/* Ejercicio práctico */}
                     <Card className="bg-gradient-subtle border-primary/20">
@@ -311,7 +661,11 @@ const Course = () => {
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="mb-4">Piensa en algo que te gustaría crear hoy mismo con IA (por ejemplo, una historia ilustrada o un vídeo promocional). Luego identifica:</p>
+                        <p className="mb-4">
+                          Piensa en algo que te gustaría crear hoy mismo con
+                          IA (por ejemplo, una historia ilustrada o un vídeo
+                          promocional). Luego identifica:
+                        </p>
                         <ul className="list-disc list-inside space-y-2 mb-4">
                           <li>Qué herramientas usarías</li>
                           <li>En qué orden las combinarías</li>
@@ -319,8 +673,11 @@ const Course = () => {
                         <div className="bg-card p-4 rounded-lg border">
                           <p className="font-semibold mb-2">Ejemplo guía:</p>
                           <p className="text-sm">
-                            <strong>Quiero:</strong> una historia infantil ilustrada y narrada →<br/>
-                            ChatGPT para el texto → Ideogram para las imágenes → ElevenLabs para la voz
+                            <strong>Quiero:</strong> una historia infantil
+                            ilustrada y narrada →
+                            <br />
+                            ChatGPT para el texto → Ideogram para las imágenes →
+                            ElevenLabs para la voz
                           </p>
                         </div>
                       </CardContent>
@@ -340,11 +697,16 @@ const Course = () => {
                           Lección 1.3 - ¿Qué herramienta uso para cada cosa?
                         </CardTitle>
                         <CardDescription className="mt-2">
-                          Que sepas elegir la herramienta adecuada sin perder tiempo ni probar mil cosas.
+                          Que sepas elegir la herramienta adecuada sin perder
+                          tiempo ni probar mil cosas.
                         </CardDescription>
                       </div>
                       <Button
-                        variant={completedLessons.includes("1.3") ? "default" : "outline"}
+                        variant={
+                          completedLessons.includes("1.3")
+                            ? "default"
+                            : "outline"
+                        }
                         onClick={() => toggleLessonComplete("1.3")}
                       >
                         {completedLessons.includes("1.3") ? (
@@ -361,16 +723,27 @@ const Course = () => {
                   <CardContent className="space-y-6">
                     <div className="prose prose-sm max-w-none">
                       <p className="text-lg">
-                        No pierdas tiempo probando herramientas al azar. Aquí va tu <strong>guía rápida</strong>:
+                        No pierdas tiempo probando herramientas al azar. Aquí
+                        va tu <strong>guía rápida</strong>:
                       </p>
                     </div>
 
                     {/* Tabla de selección */}
                     <div className="grid gap-3">
                       {toolSelectorData.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 bg-card rounded-lg border hover:shadow-sm transition-shadow">
-                          <div className="font-medium">Quiero hacer: {item.need}</div>
-                          <Badge variant="secondary" className="ml-4 shrink-0">{item.tool}</Badge>
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-4 bg-card rounded-lg border hover:shadow-sm transition-shadow"
+                        >
+                          <div className="font-medium">
+                            Quiero hacer: {item.need}
+                          </div>
+                          <Badge
+                            variant="secondary"
+                            className="ml-4 shrink-0"
+                          >
+                            {item.tool}
+                          </Badge>
                         </div>
                       ))}
                     </div>
@@ -384,22 +757,37 @@ const Course = () => {
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="mb-4">Crea un personaje que tenga:</p>
+                        <p className="mb-4">
+                          Crea un personaje que tenga:
+                        </p>
                         <ul className="list-disc list-inside space-y-1 mb-4">
                           <li>Un nombre</li>
-                          <li>Una historia breve (escrita con ChatGPT)</li>
-                          <li>Una imagen (creada con Ideogram o Leonardo AI)</li>
+                          <li>
+                            Una historia breve (escrita con ChatGPT)
+                          </li>
+                          <li>
+                            Una imagen (creada con Ideogram o Leonardo AI)
+                          </li>
                           <li>Una voz narrando su historia (ElevenLabs)</li>
                         </ul>
                         <div className="bg-card p-4 rounded-lg border mb-4">
-                          <p className="font-semibold mb-2">Prompt sugerido:</p>
+                          <p className="font-semibold mb-2">
+                            Prompt sugerido:
+                          </p>
                           <p className="font-mono text-sm">
-                            Crea un personaje ficticio llamado Lina, una científica que viaja en el tiempo ayudando a civilizaciones antiguas con sus conocimientos. Quiero una historia corta que sea ideal para ilustrar y narrar.
+                            Crea un personaje ficticio llamado Lina, una
+                            científica que viaja en el tiempo ayudando a
+                            civilizaciones antiguas con sus conocimientos.
+                            Quiero una historia corta que sea ideal para
+                            ilustrar y narrar.
                           </p>
                         </div>
                         <div className="flex items-center gap-2 text-sm">
                           <Users className="h-4 w-4" />
-                          <span>Luego compártelo en la comunidad (foro, grupo o Discord)</span>
+                          <span>
+                            Luego compártelo en la comunidad (foro, grupo o
+                            Discord)
+                          </span>
                         </div>
                       </CardContent>
                     </Card>
@@ -420,29 +808,45 @@ const Course = () => {
                 <CardContent>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <h3 className="font-semibold mb-3">🎓 Has aprendido:</h3>
+                      <h3 className="font-semibold mb-3">
+                        🎓 Has aprendido:
+                      </h3>
                       <ul className="space-y-1 text-sm opacity-90">
-                        <li>• Qué es la IA generativa (sin rollos ni teoría)</li>
-                        <li>• Qué tipo de herramientas existen según lo que tú quieres hacer</li>
-                        <li>• Cómo elegir la herramienta adecuada para cada tarea</li>
+                        <li>
+                          • Qué es la IA generativa (sin rollos ni teoría)
+                        </li>
+                        <li>
+                          • Qué tipo de herramientas existen según lo que tú
+                          quieres hacer
+                        </li>
+                        <li>
+                          • Cómo elegir la herramienta adecuada para cada
+                          tarea
+                        </li>
                       </ul>
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-3">🎯 Has practicado:</h3>
+                      <h3 className="font-semibold mb-3">
+                        🎯 Has practicado:
+                      </h3>
                       <ul className="space-y-1 text-sm opacity-90">
                         <li>• Tu primer prompt en ChatGPT</li>
                         <li>• Clasificar herramientas por función</li>
-                        <li>• Diseñar un mini-proyecto con varias IAs combinadas</li>
+                        <li>
+                          • Diseñar un mini-proyecto con varias IAs
+                          combinadas
+                        </li>
                       </ul>
                     </div>
                   </div>
                   <div className="mt-6 p-4 bg-white/10 rounded-lg">
                     <h3 className="font-semibold mb-2">🎁 Siguiente paso:</h3>
                     <p className="text-sm opacity-90">
-                      Pasamos al <strong>MÓDULO 2</strong>: Cómo usar estas herramientas sin pagar un céntimo.
+                      Pasamos al <strong>MÓDULO 2</strong>: Cómo usar estas
+                      herramientas sin pagar un céntimo.
                     </p>
-                    <Button 
-                      className="mt-3 bg-white text-primary hover:bg-white/90" 
+                    <Button
+                      className="mt-3 bg-white text-primary hover:bg-white/90"
                       disabled
                     >
                       Próximamente disponible
