@@ -636,91 +636,109 @@ const Course = () => {
                       </Button>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-6">
-                    {/* Contenido didáctico */}
-                    <div className="prose prose-sm max-w-none">
-                      <p className="text-lg">
-                        La Inteligencia Artificial generativa es como un{" "}
-                        <strong>ayudante invisible</strong> que puede:
-                      </p>
-                      <ul className="space-y-2 mt-4">
-                        <li className="flex items-center gap-3">
-                          <MessageSquare className="h-5 w-5 text-primary flex-shrink-0" />
-                          Escribir textos, correos, poemas o resúmenes
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <Image className="h-5 w-5 text-primary flex-shrink-0" />
-                          Crear imágenes desde cero con solo describirlas
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <Mic className="h-5 w-5 text-primary flex-shrink-0" />
-                          Hablar como un humano con cualquier voz que le pidas
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <Video className="h-5 w-5 text-primary flex-shrink-0" />
-                          Crear música, vídeos y hasta automatizar tareas de tu
-                          día a día
-                        </li>
-                      </ul>
-                      <div className="bg-accent/10 p-4 rounded-lg mt-6">
-                        <p className="flex items-start gap-3">
-                          <Lightbulb className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                          <span>
-                            <strong>Piénsalo así:</strong> la IA generativa es
-                            como tener una{" "}
-                            <strong>miniempresa a tu disposición</strong> que
-                            trabaja gratis 24/7.
-                          </span>
+                  <CardContent>
+                    <div className="space-y-6">
+                      {/* Contenido didáctico */}
+                      <div className="prose prose-sm max-w-none">
+                        <p className="text-lg">
+                          La Inteligencia Artificial generativa es como un{" "}
+                          <strong>ayudante invisible</strong> que puede:
                         </p>
+                        <ul className="space-y-2 mt-4">
+                          <li className="flex items-center gap-3">
+                            <MessageSquare className="h-5 w-5 text-primary flex-shrink-0" />
+                            Escribir textos, correos, poemas o resúmenes
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <Image className="h-5 w-5 text-primary flex-shrink-0" />
+                            Crear imágenes desde cero con solo describirlas
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <Mic className="h-5 w-5 text-primary flex-shrink-0" />
+                            Hablar como un humano con cualquier voz que le pidas
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <Video className="h-5 w-5 text-primary flex-shrink-0" />
+                            Crear música, vídeos y hasta automatizar tareas de
+                            tu día a día
+                          </li>
+                        </ul>
+                        <div className="bg-accent/10 p-4 rounded-lg mt-6">
+                          <p className="flex items-start gap-3">
+                            <Lightbulb className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                            <span>
+                              <strong>Piénsalo así:</strong> la IA generativa
+                              es como tener una{" "}
+                              <strong>miniempresa a tu disposición</strong> que
+                              trabaja gratis 24/7.
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Herramientas mencionadas */}
-                    <div>
-                      <h3 className="font-semibold mb-3 flex items-center gap-2">
-                        <Wrench className="h-5 w-5" />
-                        Herramientas mencionadas
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          "ChatGPT",
-                          "Gemini",
-                          "Claude",
-                          "Midjourney",
-                          "ElevenLabs",
-                          "Make",
-                        ].map((tool) => (
-                          <Badge key={tool} variant="secondary">
-                            {tool}
-                          </Badge>
-                        ))}
+                      {/* Herramientas mencionadas */}
+                      <div>
+                        <h3 className="font-semibold mb-3 flex items-center gap-2">
+                          <Wrench className="h-5 w-5" />
+                          Herramientas mencionadas
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            "ChatGPT",
+                            "Gemini",
+                            "Claude",
+                            "Midjourney",
+                            "ElevenLabs",
+                            "Make",
+                          ].map((tool) => (
+                            <Badge key={tool} variant="secondary">
+                              {tool}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Ejercicio práctico */}
-                    <Card className="bg-gradient-subtle border-primary/20">
+                      {/* Ejercicio práctico */}
+                      <Card className="bg-gradient-subtle border-primary/20">
+                        <CardHeader>
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <FlaskConical className="h-5 w-5 text-primary" />
+                            Ejercicio práctico
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-4">
+                            Abre ChatGPT o Gemini y prueba este prompt:
+                          </p>
+                          <div className="bg-card p-4 rounded-lg border font-mono text-sm">
+                            Quiero organizar un fin de semana con amigos. Somos
+                            4, tenemos coche, poco presupuesto y nos gustan las
+                            actividades al aire libre. ¿Qué plan podrías
+                            organizarme con lugares, horarios y presupuesto
+                            aproximado?
+                          </div>
+                          <div className="mt-4 p-3 bg-primary/10 rounded-lg">
+                            <p className="text-sm">
+                              <strong>Resultado esperado:</strong> Una
+                              propuesta real de viaje con opciones de rutas,
+                              alojamiento barato y actividades, todo generado
+                              por IA.
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                    <Card className="mt-6">
                       <CardHeader>
                         <CardTitle className="text-lg flex items-center gap-2">
-                          <FlaskConical className="h-5 w-5 text-primary" />
-                          Ejercicio práctico
+                          <PlayCircle className="h-5 w-5 text-primary" />
+                          Vídeo Resumen de la Lección
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="mb-4">
-                          Abre ChatGPT o Gemini y prueba este prompt:
-                        </p>
-                        <div className="bg-card p-4 rounded-lg border font-mono text-sm">
-                          Quiero organizar un fin de semana con amigos. Somos 4,
-                          tenemos coche, poco presupuesto y nos gustan las
-                          actividades al aire libre. ¿Qué plan podrías
-                          organizarme con lugares, horarios y presupuesto
-                          aproximado?
-                        </div>
-                        <div className="mt-4 p-3 bg-primary/10 rounded-lg">
-                          <p className="text-sm">
-                            <strong>Resultado esperado:</strong> Una propuesta
-                            real de viaje con opciones de rutas, alojamiento
-                            barato y actividades, todo generado por IA.
+                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                          <p className="text-muted-foreground">
+                            Próximamente: Vídeo de la lección 1.1
                           </p>
                         </div>
                       </CardContent>
@@ -764,94 +782,111 @@ const Course = () => {
                       </Button>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="prose prose-sm max-w-none">
-                      <p className="text-lg">
-                        Piensa en la IA como una{" "}
-                        <strong>caja de herramientas</strong>. No todas hacen
-                        lo mismo, pero todas te ayudan a crear algo. Aquí
-                        tienes una clasificación práctica y visual:
-                      </p>
-                    </div>
+                  <CardContent>
+                    <div className="space-y-6">
+                      <div className="prose prose-sm max-w-none">
+                        <p className="text-lg">
+                          Piensa en la IA como una{" "}
+                          <strong>caja de herramientas</strong>. No todas hacen
+                          lo mismo, pero todas te ayudan a crear algo. Aquí
+                          tienes una clasificación práctica y visual:
+                        </p>
+                      </div>
 
-                    {/* START: Updated Content for Lesson 1.2 */}
-                    <Tabs defaultValue="Multimodales" className="w-full">
-                      <TabsList className="flex flex-wrap h-auto justify-start">
-                        {Object.keys(aiToolsByCategory).map((category) => (
-                          <TabsTrigger key={category} value={category}>
-                            {category}
-                          </TabsTrigger>
-                        ))}
-                      </TabsList>
-                      {Object.entries(aiToolsByCategory).map(
-                        ([category, tools]) => (
-                          <TabsContent
-                            key={category}
-                            value={category}
-                            className="mt-4"
-                          >
-                            <div className="grid gap-4 md:grid-cols-2">
-                              {tools.map((tool, index) => (
-                                <Card key={index} className="p-4 bg-card/50 border-border/50 shadow-md">
-                                  <CardTitle className="text-lg mb-2 text-primary">
-                                    {tool.name}
-                                  </CardTitle>
-                                  <div className="text-sm space-y-2 text-muted-foreground">
-                                    <p>
-                                      <Globe className="inline h-4 w-4 mr-2 text-accent" />
-                                      {tool.web}
-                                    </p>
-                                    <p>
-                                      <Download className="inline h-4 w-4 mr-2 text-accent" />
-                                      Instalable: {tool.offline}
-                                    </p>
-                                    <div>
-                                      <strong>Planes:</strong>
-                                      <ul className="list-disc pl-5 mt-1">
-                                        {tool.plans.map((plan, pIndex) => (
-                                          <li key={pIndex}>
-                                            <strong>{plan.name}</strong> (
-                                            {plan.price}): {plan.features}
-                                          </li>
-                                        ))}
-                                      </ul>
+                      {/* START: Updated Content for Lesson 1.2 */}
+                      <Tabs defaultValue="Multimodales" className="w-full">
+                        <TabsList className="flex flex-wrap h-auto justify-start">
+                          {Object.keys(aiToolsByCategory).map((category) => (
+                            <TabsTrigger key={category} value={category}>
+                              {category}
+                            </TabsTrigger>
+                          ))}
+                        </TabsList>
+                        {Object.entries(aiToolsByCategory).map(
+                          ([category, tools]) => (
+                            <TabsContent
+                              key={category}
+                              value={category}
+                              className="mt-4"
+                            >
+                              <div className="grid gap-4 md:grid-cols-2">
+                                {tools.map((tool, index) => (
+                                  <Card key={index} className="p-4 bg-card/50 border-border/50 shadow-md">
+                                    <CardTitle className="text-lg mb-2 text-primary">
+                                      {tool.name}
+                                    </CardTitle>
+                                    <div className="text-sm space-y-2 text-muted-foreground">
+                                      <p>
+                                        <Globe className="inline h-4 w-4 mr-2 text-accent" />
+                                        {tool.web}
+                                      </p>
+                                      <p>
+                                        <Download className="inline h-4 w-4 mr-2 text-accent" />
+                                        Instalable: {tool.offline}
+                                      </p>
+                                      <div>
+                                        <strong>Planes:</strong>
+                                        <ul className="list-disc pl-5 mt-1">
+                                          {tool.plans.map((plan, pIndex) => (
+                                            <li key={pIndex}>
+                                              <strong>{plan.name}</strong> (
+                                              {plan.price}): {plan.features}
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
                                     </div>
-                                  </div>
-                                </Card>
-                              ))}
-                            </div>
-                          </TabsContent>
-                        )
-                      )}
-                    </Tabs>
-                    {/* END: Updated Content for Lesson 1.2 */}
+                                  </Card>
+                                ))}
+                              </div>
+                            </TabsContent>
+                          )
+                        )}
+                      </Tabs>
+                      {/* END: Updated Content for Lesson 1.2 */}
 
-                    {/* Ejercicio práctico */}
-                    <Card className="bg-gradient-subtle border-primary/20">
+                      {/* Ejercicio práctico */}
+                      <Card className="bg-gradient-subtle border-primary/20">
+                        <CardHeader>
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <FlaskConical className="h-5 w-5 text-primary" />
+                            Ejercicio práctico
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-4">
+                            Piensa en algo que te gustaría crear hoy mismo con
+                            IA (por ejemplo, una historia ilustrada o un vídeo
+                            promocional). Luego identifica:
+                          </p>
+                          <ul className="list-disc list-inside space-y-2 mb-4">
+                            <li>Qué herramientas usarías</li>
+                            <li>En qué orden las combinarías</li>
+                          </ul>
+                          <div className="bg-card p-4 rounded-lg border">
+                            <p className="font-semibold mb-2">Ejemplo guía:</p>
+                            <p className="text-sm">
+                              <strong>Quiero:</strong> una historia infantil
+                              ilustrada y narrada →
+                              <br />
+                              ChatGPT para el texto → Ideogram para las imágenes
+                              → ElevenLabs para la voz
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                    <Card className="mt-6">
                       <CardHeader>
                         <CardTitle className="text-lg flex items-center gap-2">
-                          <FlaskConical className="h-5 w-5 text-primary" />
-                          Ejercicio práctico
+                          <PlayCircle className="h-5 w-5 text-primary" />
+                          Vídeo Resumen de la Lección
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="mb-4">
-                          Piensa en algo que te gustaría crear hoy mismo con
-                          IA (por ejemplo, una historia ilustrada o un vídeo
-                          promocional). Luego identifica:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 mb-4">
-                          <li>Qué herramientas usarías</li>
-                          <li>En qué orden las combinarías</li>
-                        </ul>
-                        <div className="bg-card p-4 rounded-lg border">
-                          <p className="font-semibold mb-2">Ejemplo guía:</p>
-                          <p className="text-sm">
-                            <strong>Quiero:</strong> una historia infantil
-                            ilustrada y narrada →
-                            <br />
-                            ChatGPT para el texto → Ideogram para las imágenes →
-                            ElevenLabs para la voz
+                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                          <p className="text-muted-foreground">
+                            Próximamente: Vídeo de la lección 1.2
                           </p>
                         </div>
                       </CardContent>
@@ -894,74 +929,91 @@ const Course = () => {
                       </Button>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="prose prose-sm max-w-none">
-                      <p className="text-lg">
-                        No pierdas tiempo probando herramientas al azar. Aquí
-                        va tu <strong>guía rápida</strong>:
-                      </p>
-                    </div>
+                  <CardContent>
+                    <div className="space-y-6">
+                      <div className="prose prose-sm max-w-none">
+                        <p className="text-lg">
+                          No pierdas tiempo probando herramientas al azar. Aquí
+                          va tu <strong>guía rápida</strong>:
+                        </p>
+                      </div>
 
-                    {/* Tabla de selección */}
-                    <div className="grid gap-3">
-                      {toolSelectorData.map((item, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between p-4 bg-card rounded-lg border hover:shadow-sm transition-shadow"
-                        >
-                          <div className="font-medium">
-                            Quiero hacer: {item.need}
-                          </div>
-                          <Badge
-                            variant="secondary"
-                            className="ml-4 shrink-0"
+                      {/* Tabla de selección */}
+                      <div className="grid gap-3">
+                        {toolSelectorData.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between p-4 bg-card rounded-lg border hover:shadow-sm transition-shadow"
                           >
-                            {item.tool}
-                          </Badge>
-                        </div>
-                      ))}
-                    </div>
+                            <div className="font-medium">
+                              Quiero hacer: {item.need}
+                            </div>
+                            <Badge
+                              variant="secondary"
+                              className="ml-4 shrink-0"
+                            >
+                              {item.tool}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
 
-                    {/* Reto gamificado */}
-                    <Card className="bg-gradient-accent border-accent/20">
+                      {/* Reto gamificado */}
+                      <Card className="bg-gradient-accent border-accent/20">
+                        <CardHeader>
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <Trophy className="h-5 w-5 text-accent" />
+                            Reto IA express
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-4">
+                            Crea un personaje que tenga:
+                          </p>
+                          <ul className="list-disc list-inside space-y-1 mb-4">
+                            <li>Un nombre</li>
+                            <li>
+                              Una historia breve (escrita con ChatGPT)
+                            </li>
+                            <li>
+                              Una imagen (creada con Ideogram o Leonardo AI)
+                            </li>
+                            <li>Una voz narrando su historia (ElevenLabs)</li>
+                          </ul>
+                          <div className="bg-card p-4 rounded-lg border mb-4">
+                            <p className="font-semibold mb-2">
+                              Prompt sugerido:
+                            </p>
+                            <p className="font-mono text-sm">
+                              Crea un personaje ficticio llamado Lina, una
+                              científica que viaja en el tiempo ayudando a
+                              civilizaciones antiguas con sus conocimientos.
+                              Quiero una historia corta que sea ideal para
+                              ilustrar y narrar.
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm">
+                            <Users className="h-4 w-4" />
+                            <span>
+                              Luego compártelo en la comunidad (foro, grupo o
+                              Discord)
+                            </span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                    <Card className="mt-6">
                       <CardHeader>
                         <CardTitle className="text-lg flex items-center gap-2">
-                          <Trophy className="h-5 w-5 text-accent" />
-                          Reto IA express
+                          <PlayCircle className="h-5 w-5 text-primary" />
+                          Vídeo Resumen de la Lección
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="mb-4">
-                          Crea un personaje que tenga:
-                        </p>
-                        <ul className="list-disc list-inside space-y-1 mb-4">
-                          <li>Un nombre</li>
-                          <li>
-                            Una historia breve (escrita con ChatGPT)
-                          </li>
-                          <li>
-                            Una imagen (creada con Ideogram o Leonardo AI)
-                          </li>
-                          <li>Una voz narrando su historia (ElevenLabs)</li>
-                        </ul>
-                        <div className="bg-card p-4 rounded-lg border mb-4">
-                          <p className="font-semibold mb-2">
-                            Prompt sugerido:
+                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                          <p className="text-muted-foreground">
+                            Próximamente: Vídeo de la lección 1.3
                           </p>
-                          <p className="font-mono text-sm">
-                            Crea un personaje ficticio llamado Lina, una
-                            científica que viaja en el tiempo ayudando a
-                            civilizaciones antiguas con sus conocimientos.
-                            Quiero una historia corta que sea ideal para
-                            ilustrar y narrar.
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <Users className="h-4 w-4" />
-                          <span>
-                            Luego compártelo en la comunidad (foro, grupo o
-                            Discord)
-                          </span>
                         </div>
                       </CardContent>
                     </Card>
