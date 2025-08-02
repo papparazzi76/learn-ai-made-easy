@@ -792,17 +792,17 @@ const Course = () => {
                           >
                             <div className="grid gap-4 md:grid-cols-2">
                               {tools.map((tool, index) => (
-                                <Card key={index} className="p-4">
-                                  <CardTitle className="text-lg mb-2">
+                                <Card key={index} className="p-4 bg-card/50 border-border/50 shadow-md">
+                                  <CardTitle className="text-lg mb-2 text-primary">
                                     {tool.name}
                                   </CardTitle>
                                   <div className="text-sm space-y-2 text-muted-foreground">
                                     <p>
-                                      <Globe className="inline h-4 w-4 mr-2" />
+                                      <Globe className="inline h-4 w-4 mr-2 text-accent" />
                                       {tool.web}
                                     </p>
                                     <p>
-                                      <Download className="inline h-4 w-4 mr-2" />
+                                      <Download className="inline h-4 w-4 mr-2 text-accent" />
                                       Instalable: {tool.offline}
                                     </p>
                                     <div>
