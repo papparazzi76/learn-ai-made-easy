@@ -74,7 +74,8 @@ const Course = () => {
           {
             name: "Plus",
             price: "20 $/mes",
-            features: "GPT-4o (texto, imagen, voz, archivos, web), acceso rápido",
+            features:
+              "GPT-4o (texto, imagen, voz, archivos, web), acceso rápido",
           },
         ],
       },
@@ -477,7 +478,11 @@ const Course = () => {
         offline: "No",
         models: "Gemini",
         plans: [
-          { name: "Gratuito", price: "0 €", features: "Acceso a entorno de pruebas" },
+          {
+            name: "Gratuito",
+            price: "0 €",
+            features: "Acceso a entorno de pruebas",
+          },
         ],
       },
     ],
@@ -771,7 +776,7 @@ const Course = () => {
 
                     {/* START: Updated Content for Lesson 1.2 */}
                     <Tabs defaultValue="Multimodales" className="w-full">
-                      <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 lg:grid-cols-8">
+                      <TabsList className="flex flex-wrap h-auto justify-start">
                         {Object.keys(aiToolsByCategory).map((category) => (
                           <TabsTrigger key={category} value={category}>
                             {category}
