@@ -1,9 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Play, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Play, Sparkles, Users, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import heroImage from "@/assets/hero-ai-network.jpg";
 
 const Hero = () => {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    if (user) {
+      // User is logged in, go to course
+      console.log("Navigate to course dashboard");
+    } else {
+      // User not logged in, go to auth
+      navigate("/auth");
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background with gradient overlay */}
@@ -69,15 +84,37 @@ const Hero = () => {
         
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-scale-in" style={{ animationDelay: '0.6s' }}>
-          <Button className="btn-hero group">
-            Empieza gratis ahora
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          
-          <Button variant="secondary" size="lg" className="bg-card/80 hover:bg-card border border-border/50 backdrop-blur-sm">
-            <Play className="mr-2 w-5 h-5" />
-            Ver demo (2 min)
-          </Button>
+          {user ? (
+            <div className="flex flex-col sm:flex-row gap-4 items-center">
+              <Button className="btn-hero group" onClick={handleGetStarted}>
+                Continuar aprendiendo
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <span>Hola, {user.email}</span>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={signOut}
+                  className="h-8 px-2"
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Button className="btn-hero group" onClick={handleGetStarted}>
+                Empieza gratis ahora
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              
+              <Button variant="secondary" size="lg" className="bg-card/80 hover:bg-card border border-border/50 backdrop-blur-sm">
+                <Play className="mr-2 w-5 h-5" />
+                Ver demo (2 min)
+              </Button>
+            </>
+          )}
         </div>
         
         {/* Social Proof */}
