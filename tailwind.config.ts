@@ -53,13 +53,15 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				ai: {
-					purple: 'hsl(var(--ai-purple))',
-					blue: 'hsl(var(--ai-blue))',
-					cyan: 'hsl(var(--ai-cyan))',
-					success: 'hsl(var(--ai-success))',
-					warning: 'hsl(var(--ai-warning))'
-				},
+			// AI Theme Colors
+			'ai-primary': 'hsl(var(--ai-primary))',
+			'ai-secondary': 'hsl(var(--ai-secondary))',
+			'ai-accent': 'hsl(var(--ai-accent))',
+			'ai-cyan': 'hsl(200 100% 50%)',
+			'ai-purple': 'hsl(280 100% 70%)',
+			'ai-blue': 'hsl(220 100% 60%)',
+			'ai-warning': 'hsl(45 100% 60%)',
+			'ai-success': 'hsl(120 100% 40%)',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -116,10 +118,11 @@ export default {
 				'scale-in': 'scale-in 0.3s ease-out'
 			},
 			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-ai': 'var(--gradient-ai)',
 				'gradient-hero': 'var(--gradient-hero)',
 				'gradient-card': 'var(--gradient-card)',
-				'gradient-accent': 'var(--gradient-accent)',
-				'gradient-glow': 'var(--gradient-glow)'
+				'gradient-accent': 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--ai-secondary)))',
 			},
 			boxShadow: {
 				'glow': 'var(--shadow-glow)',

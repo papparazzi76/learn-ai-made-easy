@@ -1,0 +1,27 @@
+import { Html, Head, Main, NextScript } from 'next/document'
+
+export default function Document() {
+  return (
+    <Html lang="es">
+      <Head>
+        <meta name="description" content="Conviértete en experto en IA con nuestro curso gratuito para principiantes. Aprende a usar ChatGPT, Midjourney y más herramientas con lecciones prácticas. ¡Empieza hoy!" />
+        <meta name="author" content="IA Domus" />
+        <meta name="keywords" content="curso inteligencia artificial, IA principiantes, ChatGPT, Midjourney, aprender IA gratis, curso IA online" />
+        <link rel="alternate" hreflang="es" href="https://iadomus.es/" />
+
+        <meta property="og:title" content="Curso de IA para Principiantes | IA Domus" />
+        <meta property="og:description" content="Aprende Inteligencia Artificial desde cero con el curso más práctico y divertido. De novato a experto en 30 días." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@lovable_dev" />
+        <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
