@@ -140,7 +140,7 @@ const Features = () => {
           <div className="glass-card">
             <img 
               src={aiToolsImage} 
-              alt="AI Tools Showcase" 
+              alt="Logos de herramientas de Inteligencia Artificial como ChatGPT y Midjourney" 
               className="w-full h-80 object-cover rounded-2xl"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent rounded-2xl" />

@@ -28,7 +28,7 @@ const Hero = () => {
       <div className="absolute inset-0 opacity-30">
         <img 
           src={heroImage} 
-          alt="AI Network Visualization" 
+          alt="Visualización de una red neuronal de inteligencia artificial" 
           className="w-full h-full object-cover"
         />
       </div>
@@ -50,12 +50,9 @@ const Hero = () => {
         {/* Main Heading */}
         <div className="mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
           <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-            Domina la{" "}
-            <span className="gradient-text">
-              Inteligencia Artificial
-            </span>
+            Domina la <span className="gradient-text">Inteligencia Artificial</span>
             <br />
-            sin volverte loco
+            con el Mejor Curso para Principiantes
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
