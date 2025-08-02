@@ -199,6 +199,25 @@ const Course = () => {
           },
         ],
       },
+      {
+        name: "Adobe Firefly",
+        web: "firefly.adobe.com",
+        mobile: "N/A",
+        offline: "Integrada en Photoshop",
+        models: "Propio",
+        plans: [
+          {
+            name: "Gratuito",
+            price: "Incluido en Adobe ID",
+            features: "Uso limitado, marca de agua",
+          },
+          {
+            name: "Creative Cloud",
+            price: "Desde 22 €/mes",
+            features: "Créditos extra, sin límites",
+          },
+        ],
+      },
     ],
     Vídeo: [
       {
@@ -230,6 +249,34 @@ const Course = () => {
           { name: "Gratis", price: "0 €", features: "Beta con acceso limitado" },
         ],
       },
+      {
+        name: "Luma Dream Machine",
+        web: "lumalabs.ai/dream-machine",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          {
+            name: "Gratuito",
+            price: "Acceso anticipado",
+            features: "Exportación limitada (cola de espera)",
+          },
+        ],
+      },
+      {
+        name: "Kling AI",
+        web: "No tiene web abierta aún",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          {
+            name: "Pruebas internas",
+            price: "N/A",
+            features: "Acceso muy limitado",
+          },
+        ],
+      },
     ],
     "Voz y Audio": [
       {
@@ -259,6 +306,82 @@ const Course = () => {
         models: "Propio",
         plans: [
           { name: "Gratis", price: "0 €", features: "Uso personal" },
+        ],
+      },
+      {
+        name: "Udio",
+        web: "udio.com",
+        mobile: "N/A",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          { name: "Gratis", price: "0 €", features: "10 canciones al día" },
+          {
+            name: "Pro",
+            price: "10–30 $",
+            features: "+ pistas, + controles",
+          },
+        ],
+      },
+    ],
+    Productividad: [
+      {
+        name: "Fireflies AI",
+        web: "fireflies.ai",
+        mobile: "N/A",
+        offline: "No",
+        models: "N/A",
+        plans: [
+          { name: "Gratis", price: "0 €", features: "Transcripción limitada" },
+          {
+            name: "Pro",
+            price: "10 $/mes",
+            features: "Transcripción ilimitada + integración",
+          },
+        ],
+      },
+      {
+        name: "Dola",
+        web: "dolaai.com",
+        mobile: "Sí",
+        offline: "No",
+        models: "N/A",
+        plans: [
+          {
+            name: "Gratuito",
+            price: "0 €",
+            features: "Funciones básicas",
+          },
+          { name: "Pro", price: "N/A", features: "IA más proactiva" },
+        ],
+      },
+      {
+        name: "Jace AI",
+        web: "jace.ai",
+        mobile: "N/A",
+        offline: "No",
+        models: "N/A",
+        plans: [
+          { name: "Freemium", price: "0 €", features: "Funciones básicas" },
+        ],
+      },
+      {
+        name: "Gamma App",
+        web: "gamma.app",
+        mobile: "N/A",
+        offline: "No",
+        models: "N/A",
+        plans: [
+          {
+            name: "Gratis",
+            price: "0 €",
+            features: "Hasta 400 créditos de generación",
+          },
+          {
+            name: "Pro",
+            price: "10 $",
+            features: "Más temas, privacidad, sin límite",
+          },
         ],
       },
     ],
@@ -309,6 +432,52 @@ const Course = () => {
             price: "N/A",
             features: "Integrado con Google One AI Premium",
           },
+        ],
+      },
+    ],
+    "Asistentes y Ciencia": [
+      {
+        name: "Grok (xAI)",
+        web: "Solo en X Premium",
+        mobile: "X (Twitter)",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          { name: "X Premium+", price: "16 $ aprox.", features: "Incluye Grok" },
+        ],
+      },
+      {
+        name: "Microsoft Copilot",
+        web: "Integrado en Microsoft 365",
+        mobile: "Sí",
+        offline: "No",
+        models: "Propio",
+        plans: [
+          {
+            name: "Copilot Pro",
+            price: "22 €/mes",
+            features: "Requiere suscripción a M365",
+          },
+        ],
+      },
+      {
+        name: "AlphaFold",
+        web: "deepmind.com/alphafold",
+        mobile: "N/A",
+        offline: "Sí, es open source",
+        models: "Propio",
+        plans: [
+          { name: "Gratuito", price: "0 €", features: "Uso en investigación" },
+        ],
+      },
+      {
+        name: "Google AI Studio",
+        web: "aistudio.google.com",
+        mobile: "N/A",
+        offline: "No",
+        models: "Gemini",
+        plans: [
+          { name: "Gratuito", price: "0 €", features: "Acceso a entorno de pruebas" },
         ],
       },
     ],
@@ -602,7 +771,7 @@ const Course = () => {
 
                     {/* START: Updated Content for Lesson 1.2 */}
                     <Tabs defaultValue="Multimodales" className="w-full">
-                      <TabsList className="grid w-full grid-cols-3 md:grid-cols-6">
+                      <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 lg:grid-cols-8">
                         {Object.keys(aiToolsByCategory).map((category) => (
                           <TabsTrigger key={category} value={category}>
                             {category}
