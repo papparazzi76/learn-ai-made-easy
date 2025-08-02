@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle, Clock, Trophy, Zap, Brain, Target, Rocket, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const modules = [
   {
@@ -85,7 +86,7 @@ const CourseStructure = () => {
           <span className="gradient-text">6 pasos</span>
         </h2>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Metodología progresiva diseñada para que domines la IA sin frustrarte. 
+          Metodología progresiva diseñada para que domines la IA sin frustrarte.
           Cada módulo desbloquea nuevas habilidades.
         </p>
       </div>
@@ -112,80 +113,81 @@ const CourseStructure = () => {
           const isCompleted = module.status === "completed";
           
           return (
-            <Card 
-              key={module.id} 
-              className={`relative p-6 border-border/50 hover:border-primary/50 transition-all duration-300 group cursor-pointer
-                ${isLocked ? 'opacity-60' : 'hover:scale-[1.02]'}
-                ${isCompleted ? 'bg-gradient-to-br from-ai-success/10 to-ai-success/5' : ''}
-              `}
-            >
-              {/* Lock Overlay */}
-              {isLocked && (
-                <div className="absolute inset-0 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-sm font-medium text-muted-foreground">
-                      Desbloquea completando
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      módulo anterior
+            <Link to={`/course/${module.id}`} key={module.id}>
+              <Card
+                className={`relative p-6 border-border/50 hover:border-primary/50 transition-all duration-300 group cursor-pointer h-full
+                  ${isLocked ? 'opacity-60' : 'hover:scale-[1.02]'}
+                  ${isCompleted ? 'bg-gradient-to-br from-ai-success/10 to-ai-success/5' : ''}
+                `}
+              >
+                {/* Lock Overlay */}
+                {isLocked && (
+                  <div className="absolute inset-0 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-sm font-medium text-muted-foreground">
+                        Desbloquea completando
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        módulo anterior
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-              
-              {/* Module Number */}
-              <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-accent flex items-center justify-center text-accent-foreground font-bold text-sm">
-                {module.id}
-              </div>
-              
-              {/* Status Icon */}
-              <div className="absolute top-4 right-4">
-                {isCompleted && <CheckCircle className="w-6 h-6 text-ai-success" />}
-              </div>
-              
-              {/* Icon with gradient background */}
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${module.color} p-4 mb-6 group-hover:scale-110 transition-transform`}>
-                <Icon className="w-full h-full text-white" />
-              </div>
-              
-              {/* Content */}
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {module.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {module.description}
-                  </p>
+                )}
+                
+                {/* Module Number */}
+                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-accent flex items-center justify-center text-accent-foreground font-bold text-sm">
+                  {module.id}
                 </div>
                 
-                {/* Meta Info */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-xs">
-                    <Badge variant="secondary" className="bg-muted/50">
-                      {module.difficulty}
-                    </Badge>
-                    <div className="flex items-center gap-1 text-muted-foreground">
-                      <Clock className="w-3 h-3" />
-                      {module.duration}
-                    </div>
-                  </div>
-                  
-                  <div className="text-xs text-muted-foreground">
-                    {module.lessons} lecciones interactivas
-                  </div>
-                  
-                  {!isLocked && (
-                    <div className="pt-2">
-                      <Progress 
-                        value={module.status === "completed" ? 100 : (module.id === 1 ? 100 : 0)} 
-                        className="h-2" 
-                      />
-                    </div>
-                  )}
+                {/* Status Icon */}
+                <div className="absolute top-4 right-4">
+                  {isCompleted && <CheckCircle className="w-6 h-6 text-ai-success" />}
                 </div>
-              </div>
-            </Card>
+                
+                {/* Icon with gradient background */}
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${module.color} p-4 mb-6 group-hover:scale-110 transition-transform`}>
+                  <Icon className="w-full h-full text-white" />
+                </div>
+                
+                {/* Content */}
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                      {module.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {module.description}
+                    </p>
+                  </div>
+                  
+                  {/* Meta Info */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-xs">
+                      <Badge variant="secondary" className="bg-muted/50">
+                        {module.difficulty}
+                      </Badge>
+                      <div className="flex items-center gap-1 text-muted-foreground">
+                        <Clock className="w-3 h-3" />
+                        {module.duration}
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs text-muted-foreground">
+                      {module.lessons} lecciones interactivas
+                    </div>
+                    
+                    {!isLocked && (
+                      <div className="pt-2">
+                        <Progress 
+                          value={module.status === "completed" ? 100 : (module.id === 1 ? 100 : 0)} 
+                          className="h-2" 
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Card>
+            </Link>
           );
         })}
       </div>
