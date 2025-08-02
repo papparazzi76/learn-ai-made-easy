@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -40,6 +40,7 @@ import {
 const Course = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { moduleId } = useParams();
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [activeLesson, setActiveLesson] = useState("1.1");
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
@@ -557,7 +558,7 @@ const Course = () => {
                   <Brain className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="font-bold text-xl">MÓDULO 1</h1>
+                  <h1 className="font-bold text-xl">MÓDULO {moduleId}</h1>
                   <p className="text-sm text-muted-foreground">
                     Bienvenido al Universo IA
                   </p>
@@ -585,7 +586,7 @@ const Course = () => {
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <BookOpen className="h-5 w-5" />
-                  Lecciones
+                  Lecciones del Módulo {moduleId}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
