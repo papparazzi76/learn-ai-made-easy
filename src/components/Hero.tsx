@@ -12,7 +12,7 @@ const Hero = () => {
   const handleGetStarted = () => {
     if (user) {
       // User is logged in, go to course
-      console.log("Navigate to course dashboard");
+      navigate("/course");
     } else {
       // User not logged in, go to auth
       navigate("/auth");
