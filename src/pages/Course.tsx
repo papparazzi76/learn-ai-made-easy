@@ -34,6 +34,7 @@ import {
   Globe,
   Download,
   Lock,
+  X,
 } from "lucide-react";
 
 const Course = () => {
@@ -41,6 +42,8 @@ const Course = () => {
   const navigate = useNavigate();
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [activeLesson, setActiveLesson] = useState("1.1");
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   if (!user) {
     navigate("/auth");
@@ -78,6 +81,7 @@ const Course = () => {
               "GPT-4o (texto, imagen, voz, archivos, web), acceso rápido",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example1",
       },
       {
         name: "Gemini (Google)",
@@ -97,6 +101,7 @@ const Course = () => {
             features: "Modelo más potente, contexto largo, tareas complejas",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example2",
       },
       {
         name: "Claude (Anthropic)",
@@ -112,6 +117,7 @@ const Course = () => {
             features: "Claude Opus, mejor comprensión de contexto",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example3",
       },
     ],
     "Texto Puro": [
@@ -133,6 +139,7 @@ const Course = () => {
             features: "GPT-4, Claude 3, historial y archivos PDF",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example4",
       },
       {
         name: "Mistral / Open Source",
@@ -148,6 +155,7 @@ const Course = () => {
               "100% gratis, sin internet. Requiere 16GB RAM y 10-20GB disco.",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example5",
       },
     ],
     Imagen: [
@@ -169,6 +177,7 @@ const Course = () => {
             features: "Generación más rápida",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example6",
       },
       {
         name: "Ideogram AI",
@@ -180,6 +189,7 @@ const Course = () => {
           { name: "Gratis", price: "0 €", features: "Uso limitado diario" },
           { name: "Pro", price: "Próximamente", features: "N/A" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example7",
       },
       {
         name: "Leonardo AI",
@@ -199,6 +209,7 @@ const Course = () => {
             features: "Más tokens, calidad, prioridad",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example8",
       },
       {
         name: "Adobe Firefly",
@@ -218,6 +229,7 @@ const Course = () => {
             features: "Créditos extra, sin límites",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example9",
       },
     ],
     Vídeo: [
@@ -239,6 +251,7 @@ const Course = () => {
             features: "Exportación HD, más tiempo y calidad",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example10",
       },
       {
         name: "Pika.art",
@@ -249,6 +262,7 @@ const Course = () => {
         plans: [
           { name: "Gratis", price: "0 €", features: "Beta con acceso limitado" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example11",
       },
       {
         name: "Luma Dream Machine",
@@ -263,6 +277,7 @@ const Course = () => {
             features: "Exportación limitada (cola de espera)",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example12",
       },
       {
         name: "Kling AI",
@@ -277,6 +292,7 @@ const Course = () => {
             features: "Acceso muy limitado",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example13",
       },
     ],
     "Voz y Audio": [
@@ -298,6 +314,7 @@ const Course = () => {
             features: "30 mins de audio HD + clon de voz",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example14",
       },
       {
         name: "Suno AI",
@@ -308,6 +325,7 @@ const Course = () => {
         plans: [
           { name: "Gratis", price: "0 €", features: "Uso personal" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example15",
       },
       {
         name: "Udio",
@@ -323,6 +341,7 @@ const Course = () => {
             features: "+ pistas, + controles",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example16",
       },
     ],
     Productividad: [
@@ -340,6 +359,7 @@ const Course = () => {
             features: "Transcripción ilimitada + integración",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example17",
       },
       {
         name: "Dola",
@@ -355,6 +375,7 @@ const Course = () => {
           },
           { name: "Pro", price: "N/A", features: "IA más proactiva" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example18",
       },
       {
         name: "Jace AI",
@@ -365,6 +386,7 @@ const Course = () => {
         plans: [
           { name: "Freemium", price: "0 €", features: "Funciones básicas" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example19",
       },
       {
         name: "Gamma App",
@@ -384,6 +406,7 @@ const Course = () => {
             features: "Más temas, privacidad, sin límite",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example20",
       },
     ],
     Automatización: [
@@ -405,6 +428,7 @@ const Course = () => {
             features: "Más velocidad y operaciones",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example21",
       },
       {
         name: "N8N",
@@ -420,6 +444,7 @@ const Course = () => {
           },
           { name: "Cloud", price: "Desde 20 $", features: "Instancia alojada" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example22",
       },
       {
         name: "Google Opal",
@@ -434,6 +459,7 @@ const Course = () => {
             features: "Integrado con Google One AI Premium",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example23",
       },
     ],
     "Asistentes y Ciencia": [
@@ -446,6 +472,7 @@ const Course = () => {
         plans: [
           { name: "X Premium+", price: "16 $ aprox.", features: "Incluye Grok" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example24",
       },
       {
         name: "Microsoft Copilot",
@@ -460,6 +487,7 @@ const Course = () => {
             features: "Requiere suscripción a M365",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example25",
       },
       {
         name: "AlphaFold",
@@ -470,6 +498,7 @@ const Course = () => {
         plans: [
           { name: "Gratuito", price: "0 €", features: "Uso en investigación" },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example26",
       },
       {
         name: "Google AI Studio",
@@ -484,6 +513,7 @@ const Course = () => {
             features: "Acceso a entorno de pruebas",
           },
         ],
+        youtubeUrl: "https://www.youtube.com/embed/example27",
       },
     ],
   };
@@ -743,6 +773,12 @@ const Course = () => {
                         </div>
                       </CardContent>
                     </Card>
+                    <div className="text-center mt-6">
+                      <Button onClick={() => setIsChatOpen(true)}>
+                        <Bot className="mr-2 h-4 w-4" />
+                        ¿Alguna duda? Pregunta a Domito!
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -836,6 +872,15 @@ const Course = () => {
                                         </ul>
                                       </div>
                                     </div>
+                                    <Button
+                                      variant="outline"
+                                      className="mt-4"
+                                      onClick={() =>
+                                        setVideoUrl(tool.youtubeUrl)
+                                      }
+                                    >
+                                      Muéstrame la herramienta
+                                    </Button>
                                   </Card>
                                 ))}
                               </div>
@@ -891,6 +936,12 @@ const Course = () => {
                         </div>
                       </CardContent>
                     </Card>
+                    <div className="text-center mt-6">
+                      <Button onClick={() => setIsChatOpen(true)}>
+                        <Bot className="mr-2 h-4 w-4" />
+                        ¿Alguna duda? Pregunta a Domito!
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -1017,6 +1068,12 @@ const Course = () => {
                         </div>
                       </CardContent>
                     </Card>
+                    <div className="text-center mt-6">
+                      <Button onClick={() => setIsChatOpen(true)}>
+                        <Bot className="mr-2 h-4 w-4" />
+                        ¿Alguna duda? Pregunta a Domito!
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -1084,6 +1141,68 @@ const Course = () => {
           </div>
         </div>
       </div>
+      {videoUrl && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="relative w-full max-w-4xl">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute -top-12 right-0 text-white"
+              onClick={() => setVideoUrl(null)}
+            >
+              <X />
+            </Button>
+            <div className="aspect-video">
+              <iframe
+                src={videoUrl}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
+      {isChatOpen && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <Card className="w-96">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-primary rounded-full"></div>
+                <div>
+                  <CardTitle>Domito</CardTitle>
+                  <CardDescription>Tu asistente de IA</CardDescription>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsChatOpen(false)}
+              >
+                <X />
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64 overflow-y-auto p-4 border rounded-md mb-4">
+                {/* Chat messages will go here */}
+                <p className="text-muted-foreground">
+                  Hola! Soy Domito. ¿En qué puedo ayudarte con esta lección?
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Escribe tu pregunta..."
+                  className="flex-1 p-2 border rounded-md"
+                />
+                <Button>Enviar</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };
