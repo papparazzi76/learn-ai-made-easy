@@ -71,7 +71,7 @@ const Course = () => {
 
   const lessons = [
     { 
-      id: 1, 
+      id: "1.1", 
       title: "Introducción a la IA", 
       duration: "15 min", 
       completed: true,
@@ -85,7 +85,7 @@ const Course = () => {
       ]
     },
     { 
-      id: 2, 
+      id: "1.2", 
       title: "¿Qué es ChatGPT?", 
       duration: "20 min", 
       completed: true,
@@ -99,7 +99,7 @@ const Course = () => {
       ]
     },
     { 
-      id: 3, 
+      id: "1.3", 
       title: "Primeros pasos con ChatGPT", 
       duration: "25 min", 
       completed: false,
@@ -113,21 +113,49 @@ const Course = () => {
       ]
     },
     { 
-      id: 4, 
-      title: "Prompts efectivos", 
-      duration: "30 min", 
+      id: "1.4", 
+      title: "Prompts efectivos básicos", 
+      duration: "22 min", 
       completed: false,
-      description: "Técnicas avanzadas para obtener mejores resultados",
+      description: "Fundamentos para crear prompts que generen mejores respuestas",
       content: [
         "¿Qué es un prompt?",
-        "Estructura de un buen prompt",
-        "Técnicas de prompting",
-        "Ejemplos prácticos",
-        "Errores comunes a evitar"
+        "Estructura básica de un prompt",
+        "Claridad y especificidad",
+        "Ejemplos de prompts simples",
+        "Errores comunes de principiantes"
       ]
     },
     { 
-      id: 5, 
+      id: "1.5", 
+      title: "Técnicas avanzadas de prompting", 
+      duration: "28 min", 
+      completed: false,
+      description: "Métodos profesionales para optimizar tus prompts",
+      content: [
+        "Prompting en cadena",
+        "Técnica de rol y contexto",
+        "Prompts con ejemplos",
+        "Control de temperatura y tokens",
+        "Prompt engineering avanzado"
+      ]
+    },
+    { 
+      id: "1.6", 
+      title: "Casos prácticos y ejercicios", 
+      duration: "35 min", 
+      completed: false,
+      description: "Aplicación práctica de todo lo aprendido en el módulo",
+      content: [
+        "Ejercicios prácticos guiados",
+        "Casos de uso profesionales",
+        "Análisis de prompts exitosos",
+        "Proyecto final del módulo",
+        "Evaluación y retroalimentación"
+      ]
+    },
+    { 
+      id: "2.1", 
       title: "Introducción a Midjourney", 
       duration: "18 min", 
       completed: false,
@@ -216,11 +244,11 @@ const Course = () => {
                     >
                       <AccordionTrigger className="hover:no-underline py-4">
                         <div className="flex items-center gap-4 w-full">
-                          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-semibold text-sm">
+                          <div className="flex items-center justify-center w-10 h-8 rounded-full bg-primary/20 text-primary font-semibold text-xs">
                             {lesson.completed ? (
                               <CheckCircle className="w-4 h-4 text-green-500" />
                             ) : (
-                              index + 1
+                              lesson.id
                             )}
                           </div>
                           <div className="flex-1 text-left">
